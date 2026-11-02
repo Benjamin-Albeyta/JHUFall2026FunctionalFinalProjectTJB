@@ -10,7 +10,7 @@
     - Either fork
     - Or create our own graph function based on our needs
 - Data Structure
-    Immuatable array
+  - Immuatable array
     - Keys: Headers
     - Values: Columns
 - Questions/Suggestions
