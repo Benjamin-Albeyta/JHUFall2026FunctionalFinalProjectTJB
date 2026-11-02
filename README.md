@@ -1,7 +1,7 @@
 # JHUFall2026FunctionalFinalProjectTJB
 
 - Library:
-  - csv is a bit outdatged, 2019
+  - csv is a bit outdated, 2019
   - Raven features:
     Supports loading CSV datasets and transforming data.
     - For python like functionality handling dataset
@@ -10,7 +10,7 @@
     - Either fork
     - Or create our own graph function based on our needs
 - Data Structure
-  -  Immuatable array
+    Immuatable array
     - Keys: Headers
     - Values: Columns
 - Questions/Suggestions
