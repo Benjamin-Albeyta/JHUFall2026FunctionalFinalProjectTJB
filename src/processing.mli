@@ -1,4 +1,12 @@
-type column
+type col_type
+
+module type BASIC = sig
+  type 'a m
+
+  val bind : 'a m -> ('a -> 'b m) -> 'b m
+
+  val return : 'a -> 'a m
+end
 
 val read_csv : string -> string list
 (** [read_csv path] reads csv file and puts each row into a list in string list format *)
