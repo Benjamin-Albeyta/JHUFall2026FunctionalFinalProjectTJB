@@ -31,7 +31,7 @@ ________________________________________________________________________________
 |       Create / implement main             |      TBD      |    12/1/2026      |           |                                       |
 _____________________________________________________________________________________________________________________________________
 
-Include a couple sentences here below: / include the creations of the other sample types after the inital date here
+Include a couple sentences here below: / include the creations of the other sample types after the inital date here and make this presented a bit better
 
 6. You may also include any other information that will make it easier to understand your project.
 
