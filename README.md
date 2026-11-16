@@ -47,11 +47,11 @@ Data
   InitalData.cvs graph.cvs method.txt
 src
   Library
-    talon, graph etc etc
+    graph etc etc
   Sampling
     Each file contains code for each sampling method
   Processing
-    File for taking in data into code, file for putting out data into code, functordefinition.ml, module type
+    File for taking in data into code, file for putting out data into code, functordefinition.ml, module type, d-seperation file
   bin
     main.ml, test.ml
 
@@ -81,3 +81,18 @@ User Input:
 
 Goal for later: 
 - We need to call the graph first to output a list of the panda's variable, in order to sample ? for each of the columns, as it will need to be called repeatedly.
+
+Need to implement d-seperations. 
+
+Specify what folder you are looking for, for the files (results will be in a seperate one)
+
+Here is what's in the directory structure. 
+
+what would the exe --help work in terms of results. 
+
+Show that you can run a program that uses OCaml graph, show u can run a program with ocaml graph. Take an examples directory just to show u run it. 
+
+.mli as a high level skeleton for the code and functions
+
+Use dune to make build files and placeholder .ml files.
+Just the titles and then exceptions for bodies
