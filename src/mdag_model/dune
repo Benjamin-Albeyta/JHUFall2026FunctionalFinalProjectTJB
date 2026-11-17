@@ -1,0 +1,34 @@
+(library
+  (name sig)
+  (modules sig)
+  (preprocess (pps ppx_deriving.show)))
+
+(library
+  (name pmf)
+  (modules pmf)
+  (libraries
+    sig)
+  (preprocess (pps ppx_deriving.show)))
+
+(library
+  (name cpmf)
+  (modules cpmf)
+  (libraries
+    sig pmf)
+  (preprocess (pps ppx_deriving.show)))
+
+(library
+  (name dag)
+  (modules dag)
+  (libraries
+    sig ocamlgraph)
+  (preprocess (pps ppx_deriving.show)))
+
+(library
+  (name model)
+  (modules model)
+  (libraries
+    sig
+    dag
+    cpmf)
+  (preprocess (pps ppx_deriving.show)))
