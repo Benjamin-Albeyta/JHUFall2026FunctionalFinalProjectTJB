@@ -2,7 +2,8 @@
 # Trung Phung, Jung Yoon, Benjamin Albeyta
 
 1. Overview of the purpose of the project:
-The purpose of our project will be to 
+Missing data is a pervasive problem in data science. It happens when there are "?" or "NA" symbol in the data table, instead of the usual values (numbers). This project is the state-of-the-art imputation algorithm for data missing-not-at-random. This will be accomplished through the use of 
+
 
 2. Complete Mock use of the application:
 
@@ -38,3 +39,8 @@ Include a couple sentences here below: / include the creations of the other samp
 Creating a table of dependancies.
 
 OCaml graph for the independence check on the graph functions
+Give me a graph I give you a vertex
+
+Fit will call model 
+
+then once you have fit you can do sample
