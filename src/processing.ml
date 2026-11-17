@@ -172,7 +172,17 @@ module Table = struct
   let extract_table result_table =
     match result_table with
     | Ok t -> t
-    | Error e -> Error e
+    | Error e -> failwith e
+
+  let column_types (t : t) =
+    let row = Iarray.get t.rows 0 in
+    Iarray.map (fun s -> 
+      match s with 
+      | Cell.StringCell _ -> "String"
+      | Cell.IntCell _ -> "Int"
+      | Cell.BoolCell _ -> "Bool"
+      | Cell.FloatCell _ -> "Float") 
+      row
 
 end
 
