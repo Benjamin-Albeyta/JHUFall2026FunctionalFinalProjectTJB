@@ -96,3 +96,12 @@ Show that you can run a program that uses OCaml graph, show u can run a program 
 
 Use dune to make build files and placeholder .ml files.
 Just the titles and then exceptions for bodies
+
+Creating a table of dependancies.
+
+OCaml graph for the independence check on the graph functions
+Give me a graph I give you a vertex
+
+Fit will call model 
+
+then once you have fit you can do sample
