@@ -39,6 +39,17 @@ ________________________________________________________________________________
 |       Create / implement main             |      TBD      |    12/1/2026      |           |                                       |
 _____________________________________________________________________________________________________________________________________
 
-Include a couple sentences here below: / include the creations of the other sample types after the inital date here and make this presented a bit better
-
 6. You may also include any other information that will make it easier to understand your project.
+
+This is the general structure for the files in our project:
+Data
+  InitalData.cvs graph.cvs method.txt
+src
+  Library
+    graph etc etc
+  Sampling
+    Each file contains code for each sampling method
+  Processing
+    File for taking in data into code, file for putting out data into code, functordefinition.ml, module type, d-seperation file
+  bin
+    main.ml, test.ml
