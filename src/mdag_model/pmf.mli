@@ -10,57 +10,67 @@
   The PMF is generally denoted p(X), called a pmf over XX.
 
   There are 2 constraints for any PMF p(X), called probability constraints
-  1. p(x) >= 0 for all values x.
-  2. \sum_{x in XX} p(x) = 1.
+  1. (Non-negative) p(x) >= 0 for all values x.
+  2. (Normalized) \sum_{x in XX} p(x) = 1.
 
   This module is an implementation of the PMF map when the sets XX is finite.
-  A naive and clunky data structure for p(X) is a vector V of dimensions `XX`,
-  where the x-element V_{x} = p(X=x).
-  This supports a wide range of linear algebra operations.
-  However, we don't need that here.
-  All we need is to look up the value p(x), modify p(X), and sample from p(X).
-  This can be done using a `Map`.
-  [Module Map](https://ocaml.org/manual/5.5/api/Map.html)
-*)
 
+  Input module [X] is a COMPARABLE, like Int, Str, etc, associated with the input X.
+  Output module [S] is a set of operations applying on any non-negative function over X.
+  The type [S.t] of the output module is the type of a non-negative function over X.
+  Implementation is done with [Map](https://ocaml.org/manual/5.5/api/Map.html).
+
+  -------------
+  KEY FUNCTIONS
+  -------------
+
+  - [normalize f] returns the normalized function [f'] of a non-negative function [f].
+  - [sample n f] returns a list of [n] elements sampled from the pmf [f].
+*)
 open Sig
 
 (**
   Output signature of the functor Make(Xx).
-  This is the module of all finite and non-negative functions 
-  on some finite and comparable set Xx. Mathematically, this is the module
-  for all point mass measures on Xx.
 *)
 module type S = sig
-  type key
-  (** Type of the input data. *)
+
+  type x
+  (** Type of the input x in Xx. *)
 
   type t
-  (** [float] is the type of the output data. [t] is the type of maps on X. *)
+  (** [t] is the type of any function f(x) defined on X. *)
 
   val zero : t
   (** [zero] is a zero function mapping all keys to zero number. *)
 
-  val eval : key -> t -> float
-  (** [eval x f] is the output of f(x), with f is a map and x is an input. *)
-
-  val add : key -> float -> t -> t
-  (** [add x y f] returns a new map [f'] which is similar to [f], but [f'(x) = y]. *)
-
-  val remove : key -> t -> t
-  (** [remove x f] returns a new map [f'] which is similar to [f], but [f'(x) = 0]. *)
-
-  val to_pmf : t -> t option
+  val update : (float -> float) -> x -> t -> t
   (**
-  If [f] is a non-negative map, [to_pmf f] returns the normalization of [f],
-  which is a pmf map [Some f'], such that the sum of [f'(x)] over all keys [x] is [1].
-  Otherwise, [to_pmf f] returns [None].
+    [update g x f] returns a new map [f'] which is similar to [f], but
+    the value [y] mapped to [x] is replaced by [g(y)].
   *)
 
-  val sample : int -> t -> key list
-  (** [sample n f] returns a list of data obtained by sampling from the pmf f. *)
+  val trim : t -> t
+  (** [trim f] returns new function [f'] on X with all negative outputs replaced by zero. *)
+
+  val eval : x -> t -> float
+  (** [eval x f] is the output of f(x), with f is a map and x is an input. *)
+
+  val normalize : t -> t
+  (**
+    [normalize f] returns the normalized function [f'] of a non-negative function [f].
+  *)
+
+  val support : t -> x list
+  (** [support f] returns the support of a non-negative function [f].
+  The support of [f] is defined as the set of values of X for which f(x) > 0. *)
+
+  val sample : int -> t -> x list
+  (**
+    [sample n f] returns a list of [n] elements sampled from the pmf [f].
+    By definition, this list only contain values in the support of f.
+  *)
 end
 
-module type MAKE = functor (Xx : COMPARABLE) -> S with type key = Xx.t
+module type MAKE = functor (Xx : COMPARABLE) -> S with type x = Xx.t
 
 module Make : MAKE

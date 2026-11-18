@@ -22,48 +22,59 @@
 open Sig
 
 (**
-  Output signature of the functor Make(X, Y).
-  This is the module of all finite and non-negative functions 
-  on some finite and comparable set Yy, indexed by a finite and comparable set Xx.
-  Mathematically, this is the module for all point mass measures on Yy,
-  conditioned on Xx.
+  Output signature of the functor Make(Xx)(Yy).
 *)
 module type S = sig
-  type kx
-  (** Type of the conditioning input data XX. *)
 
-  type ky
-  (** Type of the input data YY. *)
+  type x
+  (** Type of the input x in Xx. *)
+  type y
+  (** Type of the input y in Yy. *)
+  type fy
+  (** [fy] is the type of any function f(y) defined on Y. *)
+  type fyx
+  (** [fyx] is the type of any function f(y | x) defined on Y and indexed by X. *)
 
   type t
-  (** [float] is the type of the output data f(y | x). [t] is the type of conditional maps f(. | .). *)
+  (** [t] is the type of non-negative functions f(y | x) defined on Y and indexed by X. *)
 
   val zero : t
-  (** [zero] is a zero function mapping all key pairs to zero function. *)
+  (** Is the zero function on Y for all x. That is, zero(y | x) = 0 for all y, x *)
 
-  val add : kx -> ky -> float -> t -> t
-  (** [add x y v f] returns a new map [f'] which is similar to [f], but [f'(y | x) = v]. *)
-
-  val eval : kx -> ky -> t -> float
-  (** [eval x y f] is the output of f(y | x), with f is a cmap, x, y are input. *)
-
-  val remove : kx -> ky -> t -> t
-  (** [remove x y f] returns a new map [f'] which is similar to [f], but [f'(y | x) = 0]. *)
-
-  val to_cpmf : t -> t option
+  val update : (float -> float) -> x -> y -> fyx -> fyx
   (**
-  If [f] is a non-negative map, [to_cpmf f] returns the normalization of [f],
-  which is a cpmf map [Some f'], such that the sum of [f'(y | x)] over all keys [y] is [1],
-  for all conditional value [x].
-  Otherwise, [to_cpmf f] returns [None].
+    [update g x y f] returns a new map [f'] which is similar to [f], but
+    the value [z = f(y | x)] is replaced by [g(z)].
   *)
 
-  val sample : int -> kx -> t -> ky list
-  (** [sample n x f] returns a list of data obtained by sampling from the pmf f(Y | x). *)
+  val trim : fyx -> t
+  (**
+    [trim f] returns new function [f'] with all negative outputs replaced by zero.
+    That is, f'(. | x) is the trimmed version of f(. | x), for all x.
+  *)
+
+  val eval : x -> y -> t -> float
+  (** [eval x y f] is the value of f(y | x). *)
+
+  val normalize : t -> t
+  (**
+    [normalize f] returns the normalized function [f'] of a non-negative function [f].
+    That is, for all x, f'(. | x) is the normalized pmf of f(. | x).
+  *)
+
+  val support : x -> t -> y list
+  (** [support f] returns the support of a non-negative function f(. | x).
+  The support of f(. | x) is defined as the set of values of Y for which f(y | x) > 0. *)
+
+  val csample : int -> x -> t -> y list
+  (**
+    [sample n x f] returns a list of [n] elements sampled from the pmf f(. | x).
+    By definition, this list only contain values in the support of f(. | x).
+  *)
 end
 
 module type MAKE = functor (Xx : COMPARABLE) (Yy : COMPARABLE) -> S with
-  type kx = Xx.t and
-  type ky = Yy.t
+  type x = Xx.t and
+  type y = Yy.t
 
 module Make : MAKE
