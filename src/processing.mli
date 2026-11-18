@@ -55,6 +55,7 @@ module Grouping : sig
 
   val present_mask : Cell.t iarray iarray -> bool iarray iarray
   val group_by_key : bool iarray iarray -> int list BoolArrayMap.t
-  val mapping_of_table : Table.t -> (bool iarray * int list) list
-  val mapping_of_path : string -> ((bool iarray * int list) list, string) result
+  val mapping_of_table : Table.t -> int list BoolArrayMap.t
+  val mapping_of_path : string -> (int list BoolArrayMap.t, string) result
 end
+(* graph csv, adjacency matrix *)

@@ -83,7 +83,7 @@ module Csv = struct
       else
         collect_columns ic ncols (lineno + 1)
           (List.map2 (fun col field -> field :: col) cols fields)
-  (* Raises when the CSV is empty, read columns by calling collect_columns *)
+  (* Raises when the CSV is empty, read columns by calling collect_columns, first element is headers, second element is for columns *)
   let read_columns path =
     try
       In_channel.with_open_text path (fun ic ->

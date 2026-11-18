@@ -1,0 +1,4 @@
+(library
+  (name demo)
+  (modules demo)
+  (libraries ocamlgraph processing))
