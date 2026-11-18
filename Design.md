@@ -2,13 +2,14 @@
 # Trung Phung, Jung Yoon, Benjamin Albeyta
 
 1. Overview of the purpose of the project:
-Missing data is a pervasive problem in data science. It happens when there are "?" or "NA" symbol in the data table, instead of the usual values (numbers). This project is the state-of-the-art imputation algorithm for data missing-not-at-random. This will be accomplished through the use of 
-
+Missing data is a pervasive problem in data science. It happens when there are "?" or "NA" symbol in the data table, instead of the usual values. This project is the state-of-the-art imputation algorithm for data missing-not-at-random. This will be accomplished through the use of a variety of sampling techniques, such as a sample from an assumed uniform distribution, or gibbs sampling; in relation to user provided CSV data sets; and a graph giving the relations between the provided data.
 
 2. Complete Mock use of the application:
+A mock use of the application would include
+
 
 3. A list of libraries you are using or plan to use in your implementation.
-We will be using
+We will be using the OCamlGraph library 
 
 4. Commented module type declarations (.mli files) which will be your initial specification. 
 
@@ -17,8 +18,8 @@ TP JY BA
 _____________________________________________________________________________________________________________________________________
 |                   Task                    |  Responsible  |    To-Do Date     | Completed |               Comments                |
 _____________________________________________________________________________________________________________________________________
-|       Create .mli Files                   |     TP/JY     |    11/18/2026     |           |                                       |
-|       Install OCaml Graphs library        |      All      |    11/18/2026     |           |                                       |
+|       Create .mli Files                   |     TP/JY     |    11/18/2026     |   Done    |                                       |
+|       Install OCaml Graphs library        |      All      |    11/18/2026     |   Done    |                                       |
 |       Finish the Design.md doc            |      BA       |    11/18/2026     |           |                                       |  
 |       Create Basic Dune files             |      All      |    11/18/2026     |           |                                       |  
 |       Create CSV intake processing        |      TBD      |    11/22/2026     |           |                                       |  
