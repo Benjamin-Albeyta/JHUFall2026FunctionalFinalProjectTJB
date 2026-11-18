@@ -6,6 +6,17 @@ let impute data_filename vertex_filename edge_filename method_name =
 open Cmdliner
 open Cmdliner.Term.Syntax
 
+type method_kinds =
+	| Em
+	| Mice
+	| Pm
+
+let method_kinds_conv = 
+	Arg.enum [
+		“em”, Em;
+		“mice”, Mice;
+		“pm”, Pm;
+	]
 let impute_cmd =
   let doc = "Impute missing data given the data file and the graph files" in
   Cmd.make (Cmd.info "impute" ~doc) @@
@@ -20,8 +31,8 @@ let impute_cmd =
     let doc = "A .csv file containing the adjacency matrix for your graph" in
     required & pos 2 (some' non_dir_file) None & info ["edge-file-name"] ~docv:"EDGEFILE" ~doc
   and+ method_name =
-    let doc = "A string representing the imputation method." in
-    required & pos 3 (some' string) None & info ["method-name"] ~docv:"METHOD" ~doc
+    let doc = "Imputation method ($(docv) must be em, mice or pm)." in
+    Arg.(value & opt method_kinds_conv Em & info ["m"; "method"] ~docv:"METHOD" ~doc)
   in
   impute data_filename vertex_filename edge_filename method_name
 
