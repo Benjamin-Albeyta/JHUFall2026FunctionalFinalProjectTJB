@@ -1,0 +1,6 @@
+(executable
+  (name impute)
+  (modules impute)
+  (libraries cmdliner)
+  (instrumentation (backend bisect_ppx_ng))
+  (promote (until-clean) (into "../..")))
